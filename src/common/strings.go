@@ -16,7 +16,6 @@ var (
 	allCharSet     = lowerCharSet + upperCharSet + specialCharSet + numberSet
 )
 
-
 func CheckPassword(password string) bool {
 	cfg := config.GetConfig()
 	if len(password) < cfg.Password.MinLength {
@@ -98,7 +97,6 @@ func GeneratePassword() string {
 	})
 	return string(inRune)
 }
-
 
 func HasUpper(s string) bool {
 	for _, r := range s {

@@ -8,7 +8,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/mehsanmgh/golang-project-web-api/api/middlewares"
 	"github.com/mehsanmgh/golang-project-web-api/api/routers"
-	"github.com/mehsanmgh/golang-project-web-api/api/validations"
+	validation "github.com/mehsanmgh/golang-project-web-api/api/validations"
 	"github.com/mehsanmgh/golang-project-web-api/config"
 )
 
@@ -18,14 +18,14 @@ func InitServer() {
 	// r := gin.Default()
 
 	// use validator:
-
 	val, ok := binding.Validator.Engine().(*validator.Validate)
 	if ok {
-		val.RegisterValidation("mobile", validations.IranianMobileNumberValidator, true)
-		val.RegisterValidation("password", validations.PasswordValidator, true)
+		val.RegisterValidation("mobile", validation.IranianMobileNumberValidator, true)
+		val.RegisterValidation("password", validation.PasswordValidator, true)
 	}
 
 	// middleware :
+	r.Use(middlewares.Cors(cfg))
 	r.Use(gin.Logger(), gin.Recovery(), middlewares.LimitByRequest() /*middlewares.OneTestMiddleware()*/)
 
 	api := r.Group("/api")
