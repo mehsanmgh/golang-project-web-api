@@ -1,9 +1,10 @@
 package handlers
 
 import (
-
 	"net/http"
+
 	"github.com/gin-gonic/gin"
+	"github.com/mehsanmgh/golang-project-web-api/api/helper"
 )
 
 type HealthHandler struct {
@@ -15,7 +16,7 @@ func NewHealthHandler() *HealthHandler {
 
 func (h *HealthHandler) Health(c *gin.Context) {
 
-	c.JSON(http.StatusOK, "Working!")
+	c.JSON(http.StatusOK, helper.GenerateBaseResponse("Working", true, 0))
 }
 
 // func (h *HealthHandler) HealthPost(c *gin.Context) {
