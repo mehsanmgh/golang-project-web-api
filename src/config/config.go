@@ -4,16 +4,17 @@ import (
 	"errors"
 	"log"
 	"os"
+	"time"
 
 	"github.com/spf13/viper"
 )
 
 type Config struct {
-	Server    	ServerConfig
-	Postgres 	PostgresConfig
-	Redis    	RedisConfig
-	Password 	PasswordConfig
-	Cors 		CorsConfig
+	Server   ServerConfig
+	Postgres PostgresConfig
+	Redis    RedisConfig
+	Password PasswordConfig
+	Cors     CorsConfig
 }
 
 type ServerConfig struct {
@@ -21,12 +22,15 @@ type ServerConfig struct {
 	RunMode string
 }
 type PostgresConfig struct {
-	Host     string
-	Port     string
-	User     string
-	Password string
-	DbName   string
-	SSLMode  bool
+	Host            string
+	Port            string
+	User            string
+	Password        string
+	DbName          string
+	SSLMode         string
+	MaxIdleConns    int
+	MaxOpenConns    int
+	ConnMaxLifetime time.Duration
 }
 
 type RedisConfig struct {
@@ -35,9 +39,12 @@ type RedisConfig struct {
 	User               string
 	Password           string
 	Db                 string
-	MinIdleConnections int
+	DialTimeout        time.Duration
+	ReadTimeout        time.Duration
+	WriteTimeout       time.Duration
 	PoolSize           int
-	PoolTimeout        int
+	PoolTimeout        time.Duration
+	IdleCheckFrequency time.Duration
 }
 
 type PasswordConfig struct {
